@@ -13,14 +13,17 @@ const openModal = function () {
   overlay.classList.remove('hidden');
 };
 
-const closeModal = function () {
+const closeModal = function (e) {
+    e.preventDefault();
+    //prevent website from jumping up 
   modal.classList.add('hidden');
   overlay.classList.add('hidden');
 };
 
-for (let i = 0; i < btnsOpenModal.length; i++)
-  btnsOpenModal[i].addEventListener('click', openModal);
-
+//for each available on node list too
+//add event listener to each button using for each 
+btnsOpenModal.forEach(btn => btn.addEventListener('click', openModal));
+//call back function executed when eventlistener added to buttons clicked
 btnCloseModal.addEventListener('click', closeModal);
 overlay.addEventListener('click', closeModal);
 
