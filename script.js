@@ -121,16 +121,30 @@ document.querySelector('.btn--close-cookie').addEventListener('click',function()
 
 //select element and style property and property name set it to string with value
 message.style.backgroundColor = '#37383d';
-message.style.width = '120px'; //have to write the css value in a string the same way you'd write it in normal css
+message.style.width = '1200px'; //have to write the css value in a string the same way you'd write it in normal css
 
 //in style attribute of element inline styles
 //can't read properties unless you set them
 console.log(message.style.height);
 //will work with background color because was set manually
+//can't do
+
+console.log(message.style.color);
 
 console.log(message.style.backgroundColor);
 //will return rgb color because was one that was set manually
-
+//get styles using getComputsedStyle
 console.log(getComputedStyle(message).color); //real style as it appears in page
 //get object with all the properties with all values then take certain 
-console.log(getComputedStyle(message).height);//can get the computed style even if didn't set it in css
+console.log(getComputedStyle(message).height);//can get the computed style even if didn't set it in css returns the height
+
+
+//increase the height by 40 pixels
+
+message.style.height = Number.parseFloat(getComputedStyle(message).height, 10) + 3 + 'px'; //specify base 10
+
+//adding 'px' to the height will turn it into string have to turn it back to number
+
+//have to parseFloat as the message height is a string/floating point number take number out of string
+
+
