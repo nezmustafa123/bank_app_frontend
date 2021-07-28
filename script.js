@@ -147,4 +147,5 @@ message.style.height = Number.parseFloat(getComputedStyle(message).height, 10) +
 
 //have to parseFloat as the message height is a string/floating point number take number out of string
 
-
+//change color of root variables css variables using document element using set property
+document.documentElement.style.setProperty('--color-primary', 'orangered');
