@@ -37,7 +37,7 @@ document.addEventListener('keydown', function (e) {
 //METHODS
 
 //selecting elements
-//selecting the document entire document of any webpage document is not enough
+//selecting the entire document using document element of any webpage just using document is not enough
 //apply css styles to entire page
 //entire html
 console.log(document.documentElement);
@@ -147,5 +147,26 @@ message.style.height = Number.parseFloat(getComputedStyle(message).height, 10) +
 
 //have to parseFloat as the message height is a string/floating point number take number out of string
 
+//defined in document root equivalent to document in javascript
 //change color of root variables css variables using document element using set property
 document.documentElement.style.setProperty('--color-primary', 'orangered');
+//pass in name of property as a string and value
+//change primary colour to orange red 
+//every where in style blue colour turns orange
+
+//can use set property for other stuff too
+
+//select and change attributes
+
+const logo = document.querySelector('.nav__logo');//select logo
+
+//select the alt and source attribute javascript creates property on the object
+
+console.log(logo.alt);
+console.log(logo.src);
+//imgs have alt and src attributes already
+
+
+
+
+
