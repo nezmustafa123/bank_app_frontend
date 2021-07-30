@@ -190,3 +190,28 @@ logo.setAttribute('company', 'Bankist');
 
 //to get relative url of pgoto
 logo.getAttribute('src');
+
+//same is for href attribute
+
+const link = document.querySelector('.twitter-link');
+console.log(link.href);
+console.log(link.getAttribute('href'));
+
+const link2 = document.querySelector('.nav__link-btn');
+console.log(link.href);
+console.log(link.getAttribute('href'));
+//href is absolute get attribute is url as written in html
+
+//data attributes
+console.log(logo.dataset.versionNumber);
+3.0;
+//data attribute stored in dataset object
+
+//classes
+
+logo.classList.add('c', 'j'); //add multiple classes to logo element
+logo.classList.remove('c', 'j');
+logo.classList.toggle('c');
+logo.classList.contains('c'); //returns boolean
+//can set class but DONT use it will override everything and add only on
+logo.className = 'Nez';
