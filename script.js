@@ -14,14 +14,14 @@ const openModal = function () {
 };
 
 const closeModal = function (e) {
-    e.preventDefault();
-    //prevent website from jumping up 
+  e.preventDefault();
+  //prevent website from jumping up
   modal.classList.add('hidden');
   overlay.classList.add('hidden');
 };
 
 //for each available on node list too
-//add event listener to each button using for each 
+//add event listener to each button using for each
 btnsOpenModal.forEach(btn => btn.addEventListener('click', openModal));
 //call back function executed when eventlistener added to buttons clicked
 btnCloseModal.addEventListener('click', closeModal);
@@ -32,7 +32,6 @@ document.addEventListener('keydown', function (e) {
     closeModal();
   }
 });
-
 
 //METHODS
 
@@ -57,10 +56,10 @@ console.log(allSections);
 //most used ways of selecting elements
 //also available on all the elements to use
 
-document.getElementById('section--1');//don't need selector
+document.getElementById('section--1'); //don't need selector
 const allButtons = document.getElementsByTagName('button'); //get element by tag name all elements with tagname button
 
-console.log(allButtons);  //tag name returns html collection instead of nodelist live collection
+console.log(allButtons); //tag name returns html collection instead of nodelist live collection
 
 //if dom changes the html collection is updated automatically
 //eg remove element in inspector
@@ -68,13 +67,12 @@ console.log(allButtons);  //tag name returns html collection instead of nodelist
 //node list doesn't update itself in the console when deleted
 
 console.log(document.getElementsByClassName('btn'));
-//no dot will also return a live html collection 
-
+//no dot will also return a live html collection
 
 //creating and inserting elements
 
 //.insertAdjacentHTML
-//creating dom element programatically 
+//creating dom element programatically
 const message = document.createElement('div');
 //creates dom element stores it into message
 //not yet in the dom itself
@@ -82,7 +80,8 @@ const message = document.createElement('div');
 message.classList.add('cookie-message'); //add class
 message.textContent = 'We use cookies for improved functionality and analytics';
 //
-message.innerHTML = 'We use cookies for imporved functionality and analytics. <button class = "btn btn--close-cookie"> Got it!</button>';
+message.innerHTML =
+  'We use cookies for imporved functionality and analytics. <button class = "btn btn--close-cookie"> Got it!</button>';
 //add class in inner html
 header.prepend(message);
 //new message element to dom after header
@@ -105,17 +104,18 @@ header.prepend(message);
 //
 //header.before(message);
 
-//delete elements 
+//delete elements
 //remove element when button clicked
 
-document.querySelector('.btn--close-cookie').addEventListener('click',function() {
+document
+  .querySelector('.btn--close-cookie')
+  .addEventListener('click', function () {
     message.remove();
-    //before could only do 
-//    message.parentElement.removeChild(message);
-});
+    //before could only do
+    //    message.parentElement.removeChild(message);
+  });
 
 //CSS STYLES
-
 
 //styles on element element style and property name using camel case
 
@@ -135,13 +135,13 @@ console.log(message.style.backgroundColor);
 //will return rgb color because was one that was set manually
 //get styles using getComputsedStyle
 console.log(getComputedStyle(message).color); //real style as it appears in page
-//get object with all the properties with all values then take certain 
-console.log(getComputedStyle(message).height);//can get the computed style even if didn't set it in css returns the height
-
+//get object with all the properties with all values then take certain
+console.log(getComputedStyle(message).height); //can get the computed style even if didn't set it in css returns the height
 
 //increase the height by 40 pixels
 
-message.style.height = Number.parseFloat(getComputedStyle(message).height, 10) + 3 + 'px'; //specify base 10
+message.style.height =
+  Number.parseFloat(getComputedStyle(message).height, 10) + 3 + 'px'; //specify base 10
 
 //adding 'px' to the height will turn it into string have to turn it back to number
 
@@ -151,22 +151,42 @@ message.style.height = Number.parseFloat(getComputedStyle(message).height, 10) +
 //change color of root variables css variables using document element using set property
 document.documentElement.style.setProperty('--color-primary', 'orangered');
 //pass in name of property as a string and value
-//change primary colour to orange red 
+//change primary colour to orange red
 //every where in style blue colour turns orange
 
 //can use set property for other stuff too
 
 //select and change attributes
 
-const logo = document.querySelector('.nav__logo');//select logo
+const logo = document.querySelector('.nav__logo'); //select logo
 
 //select the alt and source attribute javascript creates property on the object
 
 console.log(logo.alt);
-console.log(logo.src);
+console.log(logo.src); //absolute url
 //imgs have alt and src attributes already
+//javascript will screat ptoperty on object
+//if attribute on element doesn't exist it wont
 
+//set attriubutes using the dot notation
 
+logo.alt = 'Minimalist logo';
 
+console.log(logo.designer);
+//not property expected to be on images
 
+//to get class have to write class name
 
+console.log(logo.className);
+
+//to read non standard properties you add use
+
+console.log(logo.getAttribute('designer')); //Nez
+
+//use set attribute method
+
+logo.setAttribute('company', 'Bankist');
+//creat attribute called company set it to banksit
+
+//to get relative url of pgoto
+logo.getAttribute('src');
