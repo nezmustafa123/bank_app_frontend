@@ -115,103 +115,39 @@ document
     //    message.parentElement.removeChild(message);
   });
 
-//CSS STYLES
+const btnScrollTo = document.querySelector('.btn--scroll-to');
+const section1 = document.querySelector('#section--1');
+//select scroll button and then section to scroll to
 
-//styles on element element style and property name using camel case
+btnScrollTo.addEventListener('click', function (e) {
+  //first way get the coordinates fo element to scroll to
+  const section1coords = section1.getBoundingClientRect(); //returns coordinates from left side and y position mesaured from top
+  console.log(section1coords); //section's coordinates
 
-//select element and style property and property name set it to string with value
-message.style.backgroundColor = '#37383d';
-message.style.width = '1200px'; //have to write the css value in a string the same way you'd write it in normal css
+  console.log(e.target.getBoundingClientRect()); //cordinates of button x and y
+  //get x and y positon of current scroll/position
+  //when at top both values are 0
+  console.log('Current sroll (X/Y)', window.pageXOffset, window.pageYOffset); //position of browser from top and left
 
-//in style attribute of element inline styles
-//can't read properties unless you set them
-console.log(message.style.height);
-//will work with background color because was set manually
-//can't do
+  //read height and length of current viewwport
+  console.log(
+    'height/width viewport',
+    document.documentElement.clientHeight,
+    document.documentElement.clientWidth
+  );
+  //decreasing visible box will change viewport height and width
+  //global function on window object first argument is left position
+  // window.scrollTo(
+  //   section1coords.left + window.pageXOffset, //position plus scroll
+  //   section1coords.top + window.pageYOffset
+  // ); //second is position from top over viewport
 
-console.log(message.style.color);
-
-console.log(message.style.backgroundColor);
-//will return rgb color because was one that was set manually
-//get styles using getComputsedStyle
-console.log(getComputedStyle(message).color); //real style as it appears in page
-//get object with all the properties with all values then take certain
-console.log(getComputedStyle(message).height); //can get the computed style even if didn't set it in css returns the height
-
-//increase the height by 40 pixels
-
-message.style.height =
-  Number.parseFloat(getComputedStyle(message).height, 10) + 3 + 'px'; //specify base 10
-
-//adding 'px' to the height will turn it into string have to turn it back to number
-
-//have to parseFloat as the message height is a string/floating point number take number out of string
-
-//defined in document root equivalent to document in javascript
-//change color of root variables css variables using document element using set property
-document.documentElement.style.setProperty('--color-primary', 'orangered');
-//pass in name of property as a string and value
-//change primary colour to orange red
-//every where in style blue colour turns orange
-
-//can use set property for other stuff too
-
-//select and change attributes
-
-const logo = document.querySelector('.nav__logo'); //select logo
-
-//select the alt and source attribute javascript creates property on the object
-
-console.log(logo.alt);
-console.log(logo.src); //absolute url
-//imgs have alt and src attributes already
-//javascript will screat ptoperty on object
-//if attribute on element doesn't exist it wont
-
-//set attriubutes using the dot notation
-
-logo.alt = 'Minimalist logo';
-
-console.log(logo.designer);
-//not property expected to be on images
-
-//to get class have to write class name
-
-console.log(logo.className);
-
-//to read non standard properties you add use
-
-console.log(logo.getAttribute('designer')); //Nez
-
-//use set attribute method
-
-logo.setAttribute('company', 'Bankist');
-//creat attribute called company set it to banksit
-
-//to get relative url of pgoto
-logo.getAttribute('src');
-
-//same is for href attribute
-
-const link = document.querySelector('.twitter-link');
-console.log(link.href);
-console.log(link.getAttribute('href'));
-
-const link2 = document.querySelector('.nav__link-btn');
-console.log(link.href);
-console.log(link.getAttribute('href'));
-//href is absolute get attribute is url as written in html
-
-//data attributes
-console.log(logo.dataset.versionNumber);
-3.0;
-//data attribute stored in dataset object
-
-//classes
-
-logo.classList.add('c', 'j'); //add multiple classes to logo element
-logo.classList.remove('c', 'j');
-logo.classList.toggle('c');
-logo.classList.contains('c'); //returns boolean
-//can set class but DONT use it will override everything and add only on
-logo.className = 'Nez';
+  window.scrollTo({
+    left: section1coords.left + window.pageXOffset, //position plus scroll
+    top: section1coords.top + window.pageYOffset,
+    behaviour: 'smooth',
+    //specifiy object with the left top and behaviour properties
+  });
+});
+//RELATIVE TO VIEWPORT
+//add the current scrolling position
