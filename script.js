@@ -134,6 +134,7 @@ btnScrollTo.addEventListener('click', function (e) {
     'height/width viewport',
     document.documentElement.clientHeight,
     document.documentElement.clientWidth
+    //doesn't include scrollbars
   );
   //decreasing visible box will change viewport height and width
   //global function on window object first argument is left position
@@ -141,13 +142,14 @@ btnScrollTo.addEventListener('click', function (e) {
   //   section1coords.left + window.pageXOffset, //position plus scroll
   //   section1coords.top + window.pageYOffset
   // ); //second is position from top over viewport
-
+  //RELATIVE TO VIEWPORT
+  //add the current scrolling position
   window.scrollTo({
     left: section1coords.left + window.pageXOffset, //position plus scroll
     top: section1coords.top + window.pageYOffset,
     behaviour: 'smooth',
     //specifiy object with the left top and behaviour properties
   });
+  section1.scrollIntoView({ behavior: 'smooth' });
+  //modern browsers
 });
-//RELATIVE TO VIEWPORT
-//add the current scrolling position
