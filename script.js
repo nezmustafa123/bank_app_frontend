@@ -164,3 +164,12 @@ h1.addEventListener('mouseenter', function (e) {
   //like the css hover
   alert('addEventlistener: Great! You are reading the heading :D');
 });
+
+//property set to function
+h1.onmouseenter = function (e) {
+  //as hover ovrer the element alert comes up
+  //like the css hover
+  alert('onmouseenter: Great! You are reading the heading :D');
+};
+
+//for each event there is one onenter property
