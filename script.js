@@ -153,3 +153,14 @@ btnScrollTo.addEventListener('click', function (e) {
   section1.scrollIntoView({ behavior: 'smooth' });
   //modern browsers
 });
+
+//events different events mouse events keyboard events e.g scroll full screen mode etc
+//listen for events in event listener event will always happen regardless if you listen for it or not
+
+const h1 = document.querySelector('h1');
+
+h1.addEventListener('mouseenter', function (e) {
+  //as hover ovrer the element alert comes up
+  //like the css hover
+  alert('addEventlistener: Great! You are reading the heading :D');
+});
