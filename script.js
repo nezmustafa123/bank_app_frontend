@@ -145,12 +145,12 @@ btnScrollTo.addEventListener('click', function (e) {
   //RELATIVE TO VIEWPORT
   //add the current scrolling position
   window.scrollTo({
-    left: section1coords.left + window.pageXOffset, //position plus scroll
-    top: section1coords.top + window.pageYOffset,
+    left: section1coords.left, //+ window.pageXOffset, //position plus scroll
+    top: section1coords.top, //+ window.pageYOffset,
     behaviour: 'smooth',
     //specifiy object with the left top and behaviour properties
   });
-  section1.scrollIntoView({ behavior: 'smooth' });
+  // section1.scrollIntoView({ behavior: 'smooth' });
   //modern browsers
 });
 
@@ -159,17 +159,40 @@ btnScrollTo.addEventListener('click', function (e) {
 
 const h1 = document.querySelector('h1');
 
-h1.addEventListener('mouseenter', function (e) {
-  //as hover ovrer the element alert comes up
-  //like the css hover
-  alert('addEventlistener: Great! You are reading the heading :D');
-});
+// h1.addEventListener('mouseenter', function (e) {
+//   //as hover ovrer the element alert comes up
+//   //like the css hover
+//   //can add multiple event listeners to one property
+//   alert('addEventlistener: Great! You are reading the heading :D');
+// });
 
 //property set to function
-h1.onmouseenter = function (e) {
+// h1.onmouseenter = function (e) {
+//   //as hover ovrer the element alert comes up
+//   //like the css hover
+//   alert('onmouseenter: Great! You are reading the heading :D');
+// };
+
+//can remove event handler if don't need it anymore
+
+//have to put the function inside a variable
+
+const alertH1 = function (e) {
   //as hover ovrer the element alert comes up
   //like the css hover
-  alert('onmouseenter: Great! You are reading the heading :D');
+  //can add multiple event listeners to one property
+  alert('addEventlistener: Great! You are reading the heading :D');
+
+  //after running the alert it removes the eventlistener
+  // h1.removeEventListener('mouseenter', alertH1);
 };
 
-//for each event there is one onenter property
+h1.addEventListener('mouseenter', alertH1);
+//can remove event handler if don't need it anymore
+
+//have to put the function inside a variable
+//can prevent the event and remove it too in side the function
+
+//can put it into a set timeout function
+
+setTimeout(() => h1.removeEventListener('mouseenter', alertH1), 3000);
