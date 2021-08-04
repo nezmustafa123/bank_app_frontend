@@ -196,3 +196,32 @@ h1.addEventListener('mouseenter', alertH1);
 //can put it into a set timeout function
 
 setTimeout(() => h1.removeEventListener('mouseenter', alertH1), 3000);
+
+//third way of handling events html attribute
+
+//bubbling and capturing
+//when click happens on link dom generated click event not generated at target element
+//event generated at roof of document top of dom tree, travels down document root to target element passes through all the parents
+//when event reaches target target phase begins and can handle the event
+//event then travels up to the document root again bubbling phase goes up through the parents
+//event bubbles up through parent elements as if it happened in parent elements
+//can only be handled in target phase and bubbling phase
+//events propagate
+
+//rgb(255,255,255)
+//random colour function
+const randomInt = (min, max) =>
+  Math.floor(Math.random() * (max - min) + 1) + min;
+//x math.random * (max - min) then add min to both sides
+//math.random 0....1 -> 0...(max-min) -> min...(max-min + min)
+//cancel (-min + min)
+//min...
+//use random number function to generate random colour in template literal string string
+const randomColor = () => {
+  return `rgb(${randomInt(0, 255)}),(${randomInt(0, 255)},(${randomInt(
+    0,
+    255
+  )}))`;
+};
+
+console.log(randomColor(0, 255));
