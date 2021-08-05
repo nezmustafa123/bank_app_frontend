@@ -231,10 +231,15 @@ console.log(randomColor(0, 255));
 document
   .querySelector('.nav__link__login--btn')
   .addEventListener('click', function (e) {
-    //in event handler this keyword points to element to which the event handler is attached
+    //in event handler this keyword points to element to which the event handler is attached (left of dot)
     this.style.backgroundColor = randomColor(); //set style background to random colour
     console.log('LINK', e.target, e.currentTarget); // e.currenttarget element to which event is attached
-    //e.target where the element originates where the click happened NOT element on which event handler was attached
+    //e.target where the EVENT originates where the click happened NOT element on which event handler was attached
+    console.log(e.currentTarget === this);
+
+    //stop propagation (bubbling up)
+
+    e.stopPropgation();
   });
 
 document.querySelector('.nav__links').addEventListener('click', function (e) {
@@ -247,9 +252,17 @@ document.querySelector('.nav__links').addEventListener('click', function (e) {
   //event originated at link and bubbles up can handle event in all parent elements
 });
 
-document.querySelector('.nav').addEventListener('click', function (e) {
-  this.style.backgroundColor = randomColor();
-  //event handled in all three places
-  console.log('NAV', e.target);
-  //target is nav link element where click first happened
-});
+document.querySelector('.nav').addEventListener(
+  'click',
+  function (e) {
+    this.style.backgroundColor = randomColor();
+    //event handled in all three places
+    console.log('NAV', e.target);
+    //target is nav link element where click first happened
+  },
+  true
+);
+//third parameter in add eventlistner funtion use capture set to true event will no longer listen to bubbling but capture
+//first element through event passes is nav listening for event travelling down from dom
+
+//events captured when coming down from root all the way to the target
