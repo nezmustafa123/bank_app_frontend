@@ -225,3 +225,19 @@ const randomColor = () => {
 };
 
 console.log(randomColor(0, 255));
+
+//attach event handler to first link and parent elements too
+
+document.querySelector('.nav__link').addEventListener('click', function (e) {
+  console.log('LINK');
+  //in event handler this keyword points to element to which the event handler is attached
+  this.style.backgroundColor = randomColor();
+});
+
+document.querySelector('.nav__links').addEventListener('click', function (e) {
+  console.log('LINK');
+});
+
+document.querySelector('.nav').addEventListener('click', function (e) {
+  console.log('LINK');
+});
