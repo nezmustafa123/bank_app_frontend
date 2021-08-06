@@ -32,6 +32,46 @@ document.addEventListener('keydown', function (e) {
     closeModal();
   }
 });
+///scroll
+
+const btnScrollTo = document.querySelector('.btn--scroll-to');
+const section1 = document.querySelector('#section--1');
+//select scroll button and then section to scroll to
+
+btnScrollTo.addEventListener('click', function (e) {
+  //first way get the coordinates fo element to scroll to
+  const section1coords = section1.getBoundingClientRect(); //returns coordinates from left side and y position mesaured from top
+  console.log(section1coords); //section's coordinates
+
+  // console.log(e.target.getBoundingClientRect()); //cordinates of button x and y
+  //get x and y positon of current scroll/position
+  //when at top both values are 0
+  // console.log('Current sroll (X/Y)', window.pageXOffset, window.pageYOffset); //position of browser from top and left
+  //
+  // //read height and length of current viewwport
+  // console.log(
+  //   'height/width viewport',
+  //   document.documentElement.clientHeight,
+  //   document.documentElement.clientWidth
+  //   //doesn't include scrollbars
+  // );
+  //decreasing visible box will change viewport height and width
+  //global function on window object first argument is left position
+  // window.scrollTo(
+  //   section1coords.left + window.pageXOffset, //position plus scroll
+  //   section1coords.top + window.pageYOffset
+  // ); //second is position from top over viewport
+  //RELATIVE TO VIEWPORT
+  //add the current scrolling position
+  window.scrollTo({
+    left: section1coords.left, //+ window.pageXOffset, //position plus scroll
+    top: section1coords.top, //+ window.pageYOffset,
+    behaviour: 'smooth',
+    //specifiy object with the left top and behaviour properties
+  });
+  // section1.scrollIntoView({ behavior: 'smooth' });
+  //modern browsers
+});
 
 //METHODS
 
@@ -78,19 +118,29 @@ const message = document.createElement('div');
 //not yet in the dom itself
 //add class eg when selecting element
 message.classList.add('cookie-message'); //add class
-message.textContent = 'We use cookies for improved functionality and analytics';
-//
+// message.textContent = 'We use cookies for improved functionality and analytics';
+// //
 message.innerHTML =
   'We use cookies for imporved functionality and analytics. <button class = "btn btn--close-cookie"> Got it!</button>';
-//add class in inner html
+// add class in inner html
 header.prepend(message);
 //new message element to dom after header
 //first child of header element
 //header.append(message);
 //last child at the bottom
 
+//delete elements
+//remove element when button clicked
+
 //only inserted once can't be in two places simultaneously moved the element didn't insert it was already inserted by prepend
 //dom element is unique
+document
+  .querySelector('.btn--close-cookie')
+  .addEventListener('click', function () {
+    message.remove();
+    //before could only do
+    //message.parentElement.removeChild(message);
+  });
 
 //copy element
 
@@ -104,60 +154,12 @@ header.prepend(message);
 //
 //header.before(message);
 
-//delete elements
-//remove element when button clicked
 
-document
-  .querySelector('.btn--close-cookie')
-  .addEventListener('click', function () {
-    message.remove();
-    //before could only do
-    //    message.parentElement.removeChild(message);
-  });
-
-const btnScrollTo = document.querySelector('.btn--scroll-to');
-const section1 = document.querySelector('#section--1');
-//select scroll button and then section to scroll to
-
-btnScrollTo.addEventListener('click', function (e) {
-  //first way get the coordinates fo element to scroll to
-  const section1coords = section1.getBoundingClientRect(); //returns coordinates from left side and y position mesaured from top
-  console.log(section1coords); //section's coordinates
-
-  console.log(e.target.getBoundingClientRect()); //cordinates of button x and y
-  //get x and y positon of current scroll/position
-  //when at top both values are 0
-  console.log('Current sroll (X/Y)', window.pageXOffset, window.pageYOffset); //position of browser from top and left
-
-  //read height and length of current viewwport
-  console.log(
-    'height/width viewport',
-    document.documentElement.clientHeight,
-    document.documentElement.clientWidth
-    //doesn't include scrollbars
-  );
-  //decreasing visible box will change viewport height and width
-  //global function on window object first argument is left position
-  // window.scrollTo(
-  //   section1coords.left + window.pageXOffset, //position plus scroll
-  //   section1coords.top + window.pageYOffset
-  // ); //second is position from top over viewport
-  //RELATIVE TO VIEWPORT
-  //add the current scrolling position
-  window.scrollTo({
-    left: section1coords.left, //+ window.pageXOffset, //position plus scroll
-    top: section1coords.top, //+ window.pageYOffset,
-    behaviour: 'smooth',
-    //specifiy object with the left top and behaviour properties
-  });
-  // section1.scrollIntoView({ behavior: 'smooth' });
-  //modern browsers
-});
 
 //events different events mouse events keyboard events e.g scroll full screen mode etc
 //listen for events in event listener event will always happen regardless if you listen for it or not
 
-const h1 = document.querySelector('h1');
+// const h1 = document.querySelector('h1');
 
 // h1.addEventListener('mouseenter', function (e) {
 //   //as hover ovrer the element alert comes up
@@ -262,7 +264,7 @@ document.querySelector('.nav').addEventListener(
   },
   true
 );
-//third parameter in add eventlistner funtion use capture set to true event will no longer listen to bubbling but capture
+//third parameter in add eventlistner function use capture set to true event will no longer listen to bubbling but capture
 //first element through event passes is nav listening for event travelling down from dom
 
 //events captured when coming down from root all the way to the target
