@@ -7,6 +7,9 @@ const modal = document.querySelector('.modal');
 const overlay = document.querySelector('.overlay');
 const btnCloseModal = document.querySelector('.btn--close-modal');
 const btnsOpenModal = document.querySelectorAll('.btn--show-modal');
+const btnScrollTo = document.querySelector('.btn--scroll-to');
+const section1 = document.querySelector('#section--1');
+//select scroll button and then section to scroll to
 
 const openModal = function () {
   modal.classList.remove('hidden');
@@ -33,11 +36,6 @@ document.addEventListener('keydown', function (e) {
   }
 });
 ///scroll
-
-const btnScrollTo = document.querySelector('.btn--scroll-to');
-const section1 = document.querySelector('#section--1');
-//select scroll button and then section to scroll to
-
 btnScrollTo.addEventListener('click', function (e) {
   //first way get the coordinates fo element to scroll to
   const section1coords = section1.getBoundingClientRect(); //returns coordinates from left side and y position mesaured from top
@@ -178,26 +176,26 @@ document
 //can remove event handler if don't need it anymore
 
 //have to put the function inside a variable
-
-const alertH1 = function (e) {
-  //as hover ovrer the element alert comes up
-  //like the css hover
-  //can add multiple event listeners to one property
-  alert('addEventlistener: Great! You are reading the heading :D');
-
-  //after running the alert it removes the eventlistener
-  // h1.removeEventListener('mouseenter', alertH1);
-};
-
-h1.addEventListener('mouseenter', alertH1);
-//can remove event handler if don't need it anymore
-
-//have to put the function inside a variable
-//can prevent the event and remove it too in side the function
-
-//can put it into a set timeout function
-
-setTimeout(() => h1.removeEventListener('mouseenter', alertH1), 3000);
+// 
+// const alertH1 = function (e) {
+//   //as hover ovrer the element alert comes up
+//   //like the css hover
+//   //can add multiple event listeners to one property
+//   alert('addEventlistener: Great! You are reading the heading :D');
+//
+//   //after running the alert it removes the eventlistener
+//   // h1.removeEventListener('mouseenter', alertH1);
+// };
+//
+// h1.addEventListener('mouseenter', alertH1);
+// //can remove event handler if don't need it anymore
+//
+// //have to put the function inside a variable
+// //can prevent the event and remove it too in side the function
+//
+// //can put it into a set timeout function
+//
+// setTimeout(() => h1.removeEventListener('mouseenter', alertH1), 3000);
 
 //third way of handling events html attribute
 
