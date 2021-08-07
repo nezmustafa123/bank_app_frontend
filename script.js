@@ -38,7 +38,7 @@ document.addEventListener('keydown', function (e) {
 ///scroll
 btnScrollTo.addEventListener('click', function (e) {
   //first way get the coordinates fo element to scroll to
-  const section1coords = section1.getBoundingClientRect(); //returns coordinates from left side and y position mesaured from top
+  const section1coords = section1.getBoundingClientRect(); //returns coordinates from left side x and y position mesaured from top
   console.log(section1coords); //section's coordinates
 
   // console.log(e.target.getBoundingClientRect()); //cordinates of button x and y
@@ -62,13 +62,30 @@ btnScrollTo.addEventListener('click', function (e) {
   //RELATIVE TO VIEWPORT
   //add the current scrolling position
   window.scrollTo({
-    left: section1coords.left, //+ window.pageXOffset, //position plus scroll
-    top: section1coords.top, //+ window.pageYOffset,
+    left: section1coords.left + window.pageXOffset, //position plus scroll
+    top: section1coords.top + window.pageYOffset,
     behaviour: 'smooth',
     //specifiy object with the left top and behaviour properties
   });
   // section1.scrollIntoView({ behavior: 'smooth' });
   //modern browsers
+});
+
+//PAGE NAVIGATION
+//node list
+document.querySelectorAll('.nav__link').forEach(function (el) {
+  //loop over using for each, to each element attach event listener
+  el.addEventListener('click', function (e) {
+    e.preventDefault(); //prevent defaul scroll/jump to section to implement scrolling
+    console.log('LINK');
+    //take href attribulte form nav link buttons this refers to element event handler is attached to (each link)
+    //get href get attribute to get the writte href part not absolute value
+    const id = this.getAttribute('href');
+    console.log(id);
+
+    document.querySelector(id).scrollIntoView({ behavior: 'smooth' }); //use the attriute  string that is returned as a selector the href matches the id of element you want to scroll TO
+    //
+  });
 });
 
 //METHODS
@@ -152,8 +169,6 @@ document
 //
 //header.before(message);
 
-
-
 //events different events mouse events keyboard events e.g scroll full screen mode etc
 //listen for events in event listener event will always happen regardless if you listen for it or not
 
@@ -176,7 +191,7 @@ document
 //can remove event handler if don't need it anymore
 
 //have to put the function inside a variable
-// 
+//
 // const alertH1 = function (e) {
 //   //as hover ovrer the element alert comes up
 //   //like the css hover
@@ -228,19 +243,17 @@ console.log(randomColor(0, 255));
 
 //attach event handler to first link and parent elements too
 
-document
-  .querySelector('.nav__link__login--btn')
-  .addEventListener('click', function (e) {
-    //in event handler this keyword points to element to which the event handler is attached (left of dot)
-    this.style.backgroundColor = randomColor(); //set style background to random colour
-    console.log('LINK', e.target, e.currentTarget); // e.currenttarget element to which event is attached
-    //e.target where the EVENT originates where the click happened NOT element on which event handler was attached
-    console.log(e.currentTarget === this);
+document.querySelector('.nav__link').addEventListener('click', function (e) {
+  //in event handler this keyword points to element to which the event handler is attached (left of dot)
+  this.style.backgroundColor = randomColor(); //set style background to random colour
+  console.log('LINK', e.target, e.currentTarget); // e.currenttarget element to which event is attached
+  //e.target where the EVENT originates where the click happened NOT element on which event handler was attached
+  console.log(e.currentTarget === this);
 
-    //stop propagation (bubbling up)
+  //stop propagation (bubbling up)
 
-    e.stopPropgation();
-  });
+  e.stopPropagation();
+});
 
 document.querySelector('.nav__links').addEventListener('click', function (e) {
   this.style.backgroundColor = randomColor();
@@ -263,6 +276,6 @@ document.querySelector('.nav').addEventListener(
   true
 );
 //third parameter in add eventlistner function use capture set to true event will no longer listen to bubbling but capture
-//first element through event passes is nav listening for event travelling down from dom
-
+//first element event passes through is nav listening for event travelling down from dom
+//NAV COMES FIRST
 //events captured when coming down from root all the way to the target
