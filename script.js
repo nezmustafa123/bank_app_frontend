@@ -76,16 +76,40 @@ btnScrollTo.addEventListener('click', function (e) {
 document.querySelectorAll('.nav__link').forEach(function (el) {
   //loop over using for each, to each element attach event listener
   el.addEventListener('click', function (e) {
-    e.preventDefault(); //prevent defaul scroll/jump to section to implement scrolling
+    // e.preventDefault(); //prevent default scroll/jump to section to implement scrolling
+    // console.log('LINK');
+    // //take href attribulte form nav link buttons this refers to element event handler is attached to (each link)
+    // //get href get attribute to get the writte href part not absolute value
+    // const id = this.getAttribute('href');
+    // console.log(id);
+    // document.querySelector(id).scrollIntoView({ behavior: 'smooth' }); //use the attriute  string that is returned as a selector the href matches the id of element you want to scroll TO
+    // //
+    // //use event delegation put handler on common parent so event bubbles up catch event in parent element and handle it there look at event target property
+  });
+});
+
+// 1. add event listener to common parent of all events interested in
+// 2. Determine what element orginated the event using target
+
+document.querySelector('.nav__links').addEventListener('click', function (e) {
+  console.log(e.target); // use target to see where event happened work with click that happened on one of the links
+
+  //matching classlist strategy
+
+  if (e.target.classList.contains('nav__link')) {
+    // if class contains nav link fires otherwise doesn't
+    e.preventDefault(); //prevent default scroll/jump to section to implement scrolling
     console.log('LINK');
     //take href attribulte form nav link buttons this refers to element event handler is attached to (each link)
     //get href get attribute to get the writte href part not absolute value
-    const id = this.getAttribute('href');
+    const id = e.target.getAttribute('href'); //element is e.target
     console.log(id);
 
     document.querySelector(id).scrollIntoView({ behavior: 'smooth' }); //use the attriute  string that is returned as a selector the href matches the id of element you want to scroll TO
     //
-  });
+
+    //use event delegation put handler on common parent so event bubbles up catch event in parent element and handle it there look at event target property
+  }
 });
 
 //METHODS
