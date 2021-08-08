@@ -313,3 +313,14 @@ const h1 = document.querySelector('h1');
 //select a child elements
 //select the two elements with class highlight
 console.log(h1.querySelectorAll('.highlight'));
+//returns node list returns all elements with highlight class within the h1 element
+//it will go down as deep as necessary into dom tree other elements with highlight won't get selected
+//won't
+
+//direct children
+//use child node nodes can be anything text comment span etc
+
+console.log(h1.childNodes);
+
+console.log(h1.children);
+//html collection live collection which is updated
