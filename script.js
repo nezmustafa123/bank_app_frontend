@@ -303,3 +303,13 @@ document.querySelector('.nav').addEventListener(
 //first element event passes through is nav listening for event travelling down from dom
 //NAV COMES FIRST
 //events captured when coming down from root all the way to the target
+
+//DOM TRAVERSING
+//can go up down and sideways
+
+//select h1 element
+const h1 = document.querySelector('h1');
+//query selector is avaialbe on elements too
+//select a child elements
+//select the two elements with class highlight
+console.log(h1.querySelectorAll('.highlight'));
