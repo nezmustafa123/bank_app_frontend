@@ -348,7 +348,7 @@ h1.closest('.header').style.background = 'var(--gradient-seconday)';
 //closest element with header class and sets gradient on it
 //if selector matches the element which closest is called on that is what will be returned
 
-h1.closest('h1').style.background = 'var (--gradient-primary)';
+h1.closest('h1').style.background = 'var(--gradient-primary)';
 
 //similar to query selector queryelector finds children
 
@@ -360,3 +360,17 @@ console.log(h1.nextElementSibling); // next sibling h4 element
 //sibling for nodes
 console.log(h1.previousSibling);
 console.log(h1.nextSibling);
+
+//all siblings move up to parent and read children from there
+
+console.log(h1.parentElement.children); //get all the children
+
+//get all siblings including itself
+//iterable html collection spread into array
+
+[...h1.parentElement.children].forEach(function (el) {
+  if (el !== h1) {
+    el.style.transform = 'scale(0.5)';
+    //;oop through if element is diffrent scale down by changing value of transform property on style object
+  }
+});
