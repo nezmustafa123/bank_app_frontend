@@ -310,6 +310,7 @@ document.querySelector('.nav').addEventListener(
 //select h1 element
 const h1 = document.querySelector('h1');
 //query selector is avaialbe on elements too
+//going downwards: child
 //select a child elements
 //select the two elements with class highlight
 console.log(h1.querySelectorAll('.highlight'));
@@ -324,3 +325,38 @@ console.log(h1.childNodes);
 
 console.log(h1.children);
 //html collection live collection which is updated
+
+//element child
+h1.firstElementChild.style.color = 'white';
+//first child of h1 gets set to white
+
+h1.lastEelementChild.style.color = 'orangered';
+
+//going upwards: parents
+
+console.log(h1.parentNode);
+//h1 is inside header title
+//header title dirent parent
+
+console.log(h1.parentElement);
+//in this case the same element is also a node
+
+//need element which is not a direct parent find one far away in the dom tree
+//multiple elements with class header
+h1.closest('.header').style.background = 'var(--gradient-seconday)';
+
+//closest element with header class and sets gradient on it
+//if selector matches the element which closest is called on that is what will be returned
+
+h1.closest('h1').style.background = 'var (--gradient-primary)';
+
+//similar to query selector queryelector finds children
+
+//going sideways: siblings
+
+console.log(h1.previousElementSibling); //null nothing there
+console.log(h1.nextElementSibling); // next sibling h4 element
+
+//sibling for nodes
+console.log(h1.previousSibling);
+console.log(h1.nextSibling);
