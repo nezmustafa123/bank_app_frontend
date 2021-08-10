@@ -374,3 +374,9 @@ console.log(h1.parentElement.children); //get all the children
     //;oop through if element is diffrent scale down by changing value of transform property on style object
   }
 });
+
+// tabbed component
+
+const tabs = documentquerySelectorAll('.operations__tab');
+const tabsContainer = document.querySelector('.operations__tab-container');
+const tabsContent = document.querySelectorAll('.operations__content');
