@@ -392,6 +392,14 @@ tabsContainer.addEventListener('click', function (e) {
   //when clicking in tabs container there'll be no parent with that class
 
   if (!clicked) return; //if clicked is null then return the function immediately guard clause
+  //remove class on all tabs first then add
+  tabs.forEach(t => t.classList.remove('operations__tab--active'));
   //give the clicked tab operations tab active class
   clicked.classList.add('operations__tab--active');
+
+  //activate content area using data attribute match the data tab value in the dataset property with the tab element class
+  document
+    .querySelector(`.operations__content--${clicked.dataset.tab}`)
+    .classList.add('opearations__content--active'); //
+  //button stored in clicked variable get value inside dataset property use it to construct template literal and class selector
 });
