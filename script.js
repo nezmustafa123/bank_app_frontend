@@ -388,18 +388,19 @@ const tabsContent = document.querySelectorAll('.operations__content');
 tabsContainer.addEventListener('click', function (e) {
   const clicked = e.target.closest('.operations__tab'); //dom traversing search for closest operations tab use closest method find closest parent with this class name
   //use data attribute that contains number of the tab whwnever click on span element
-  console.log(clicked);
+  // console.log(clicked);
   //when clicking in tabs container there'll be no parent with that class
 
   if (!clicked) return; //if clicked is null then return the function immediately guard clause
-  //remove class on all tabs first then add
+  //remove active  class on all tabs first then add
   tabs.forEach(t => t.classList.remove('operations__tab--active'));
+  tabsContent.forEach(c => c.classList.remove('operations__content--active'));
   //give the clicked tab operations tab active class
   clicked.classList.add('operations__tab--active');
 
   //activate content area using data attribute match the data tab value in the dataset property with the tab element class
   document
     .querySelector(`.operations__content--${clicked.dataset.tab}`)
-    .classList.add('opearations__content--active'); //
+    .classList.add('operations__content--active'); //give active class
   //button stored in clicked variable get value inside dataset property use it to construct template literal and class selector
 });
