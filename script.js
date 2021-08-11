@@ -89,7 +89,7 @@ document.querySelectorAll('.nav__link').forEach(function (el) {
 });
 
 // 1. add event listener to common parent of all events interested in
-// 2. Determine what element orginated the event using target
+// 2. Determine what element orginated  from using event target
 
 document.querySelector('.nav__links').addEventListener('click', function (e) {
   console.log(e.target); // use target to see where event happened work with click that happened on one of the links
@@ -330,7 +330,7 @@ console.log(h1.children);
 h1.firstElementChild.style.color = 'white';
 //first child of h1 gets set to white
 
-h1.lastEelementChild.style.color = 'orangered';
+h1.lastElementChild.style.color = 'orangered';
 
 //going upwards: parents
 
@@ -370,13 +370,28 @@ console.log(h1.parentElement.children); //get all the children
 
 [...h1.parentElement.children].forEach(function (el) {
   if (el !== h1) {
-    el.style.transform = 'scale(0.5)';
-    //;oop through if element is diffrent scale down by changing value of transform property on style object
+    el.style.transform = 'scale(1)';
+    //loop through if element is diffrent scale down by changing value of transform property on style object
   }
 });
 
 // tabbed component
 
-const tabs = documentquerySelectorAll('.operations__tab');
+const tabs = document.querySelectorAll('.operations__tab');
 const tabsContainer = document.querySelector('.operations__tab-container');
 const tabsContent = document.querySelectorAll('.operations__content');
+//three tabs select using query selector all inefficient method
+// tabs.forEach(t => t.addEventListener('click'), () => {
+//   console.log('TAB');
+// }
+//use event delegation attach handler to parent element use event target to capture element event came from
+tabsContainer.addEventListener('click', function (e) {
+  const clicked = e.target.closest('.operations__tab'); //dom traversing search for closest operations tab use closest method find closest parent with this class name
+  //use data attribute that contains number of the tab whwnever click on span element
+  console.log(clicked);
+  //when clicking in tabs container there'll be no parent with that class
+
+  if (!clicked) return; //if clicked is null then return the function immediately guard clause
+  //give the clicked tab operations tab active class
+  clicked.classList.add('operations__tab--active');
+});
