@@ -415,6 +415,7 @@ nav.addEventListener('mouseover', function (e) {
   //attach handler to parent element
   if (e.target.classList.contains('nav__link')) {
     //don't need closest method like in tabs
+    const link = e.target;
   }
 });
 
