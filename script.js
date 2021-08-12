@@ -409,4 +409,13 @@ tabsContainer.addEventListener('click', function (e) {
 //menu fade animation
 
 //use event delegation and bubble up
-nav.addEventListener('mouseover');
+//mouse enter does NOT bubble up
+
+nav.addEventListener('mouseover', function (e) {
+  //attach handler to parent element
+  if (e.target.classList.contains('nav__link')) {
+    //don't need closest method like in tabs
+  }
+});
+
+nav.addEventListener('mouseout', function (e) {});
