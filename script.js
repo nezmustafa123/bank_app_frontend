@@ -9,8 +9,12 @@ const btnCloseModal = document.querySelector('.btn--close-modal');
 const btnsOpenModal = document.querySelectorAll('.btn--show-modal');
 const btnScrollTo = document.querySelector('.btn--scroll-to');
 const section1 = document.querySelector('#section--1');
-//select scroll button and then section to scroll to
 
+const tabs = document.querySelectorAll('.operations__tab');
+const tabsContainer = document.querySelector('.operations__tab-container');
+const tabsContent = document.querySelectorAll('.operations__content');
+//select scroll button and then section to scroll to
+const nav = document.querySelector('.nav');
 const openModal = function () {
   modal.classList.remove('hidden');
   overlay.classList.remove('hidden');
@@ -377,9 +381,6 @@ console.log(h1.parentElement.children); //get all the children
 
 // tabbed component
 
-const tabs = document.querySelectorAll('.operations__tab');
-const tabsContainer = document.querySelector('.operations__tab-container');
-const tabsContent = document.querySelectorAll('.operations__content');
 //three tabs select using query selector all inefficient method
 // tabs.forEach(t => t.addEventListener('click'), () => {
 //   console.log('TAB');
@@ -404,3 +405,8 @@ tabsContainer.addEventListener('click', function (e) {
     .classList.add('operations__content--active'); //give active class
   //button stored in clicked variable get value inside dataset property use it to construct template literal and class selector
 });
+
+//menu fade animation
+
+//use event delegation and bubble up
+nav.addEventListener('mouseover');
