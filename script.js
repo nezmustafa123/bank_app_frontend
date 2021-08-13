@@ -334,7 +334,7 @@ console.log(h1.children);
 h1.firstElementChild.style.color = 'white';
 //first child of h1 gets set to white
 
-h1.lastElementChild.style.color = 'orangered';
+h1.lastElementChild.style.color = 'white';
 
 //going upwards: parents
 
@@ -347,12 +347,12 @@ console.log(h1.parentElement);
 
 //need element which is not a direct parent find one far away in the dom tree
 //multiple elements with class header
-h1.closest('.header').style.background = 'var(--gradient-seconday)';
+// h1.closest('.header').style.background = 'var(--gradient-seconday)';
 
 //closest element with header class and sets gradient on it
 //if selector matches the element which closest is called on that is what will be returned
 
-h1.closest('h1').style.background = 'var(--gradient-primary)';
+// h1.closest('h1').style.background = 'var(--gradient-primary)';
 
 //similar to query selector queryelector finds children
 
@@ -414,8 +414,17 @@ tabsContainer.addEventListener('click', function (e) {
 nav.addEventListener('mouseover', function (e) {
   //attach handler to parent element
   if (e.target.classList.contains('nav__link')) {
-    //don't need closest method like in tabs
+    //find the element with the nav link class
+    //don't need closest method like in tabs no child elements to accifentally click
+    //put element inside link variable
     const link = e.target;
+
+    //select sibling elements move up two levels use closet method
+
+    //search for parent that matches query find closest parent with nav
+    //can also choose an even higher up parent
+    const siblings = link.closest('.nav').querySelector('.nav__link');
+    const logo = link.closest('.nav');
   }
 });
 
