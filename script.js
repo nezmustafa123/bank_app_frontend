@@ -411,7 +411,9 @@ tabsContainer.addEventListener('click', function (e) {
 //use event delegation and bubble up
 //mouse enter does NOT bubble up
 
-nav.addEventListener('mouseover', function (e) {
+const handleHover = function (e, opacity) {
+  //create parameter for opacity
+
   //attach handler to parent element
   if (e.target.classList.contains('nav__link')) {
     //find the element with the nav link class
@@ -429,37 +431,25 @@ nav.addEventListener('mouseover', function (e) {
     //siblings will contain initial link so need to make sure it's not target
     siblings.forEach(el => {
       if (el !== link) {
-        el.style.opacity = 0.5;
+        el.style.opacity = this;
         //change the opacity of all the other links to 0,5
       }
     });
-    logo.style.opacity = 0.5;
+    logo.style.opacity = this;
   }
-});
+};
 
-nav.addEventListener('mouseout', function (e) {
-  //attach handler to parent element
-  if (e.target.classList.contains('nav__link')) {
-    //if target contains nav link class
-    //find the element with the nav link class
-    //don't need closest method like in tabs no child elements to accifentally click
-    //put element inside link variable
-    const link = e.target;
+// nav.addEventListener('mouseover', function (e) {
+//   handleHover(e, 0.5);
+// }); //opacity 0.5 in this case can't pass in parameters because will call straight awaay
+// //javascript expects a function not a function to be called no value returned
+// nav.addEventListener('mouseout', function (e) {
+//   handleHover(e, 1);
+// }); // opacity 1 in this case
 
-    //select sibling elements move up two levels use closet method
-
-    //search for parent that matches query find closest parent with nav
-    //can also choose an even higher up parent in this case choosing the main nav
-    //then within it choose all the nav links
-    const siblings = link.closest('.nav').querySelectorAll('.nav');
-    const logo = link.closest('.nav').querySelector('img');
-    //siblings will contain initial link so need to make sure it's not target
-    siblings.forEach(el => {
-      if (el !== link) {
-        el.style.opacity = 1;
-        //change the opacity of all the other links to 0,5
-      }
-    });
-    logo.style.opacity = 1;
-  }
-});
+//use bind method create copry of function called on and sets this keyword to whatever pass into the function bind will not call function but will return new one with this keyword set to whatever you pass in
+nav.addEventListener('mouseover', handleHover.bind(0.5)); //opacity 0.5 in this case can't pass in parameters because will call straight awaay
+//javascript expects a function not a function to be called no value returned
+nav.addEventListener('mouseout', handleHover.bind(1)); // opacity 1 in this case
+//use this keyword in function this keyword is now opacitty
+//pass "argument" into handler using bind handler function can only take one argument
