@@ -422,9 +422,18 @@ nav.addEventListener('mouseover', function (e) {
     //select sibling elements move up two levels use closet method
 
     //search for parent that matches query find closest parent with nav
-    //can also choose an even higher up parent
-    const siblings = link.closest('.nav').querySelector('.nav__link');
-    const logo = link.closest('.nav');
+    //can also choose an even higher up parent in this case choosing the main nav
+    //then within it choose all the nav links
+    const siblings = link.closest('.nav').querySelectorAll('.nav');
+    const logo = link.closest('.nav').querySelector('img');
+    //siblings will contain initial link so need to make sure it's not target
+    siblings.forEach(el => {
+      if (el !== link) {
+        el.style.opacity = 0.5;
+        //change the opacity of all the other links to 0,5
+      }
+    });
+    logo.style.opacity = 0.5;
   }
 });
 
