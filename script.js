@@ -122,18 +122,18 @@ document.querySelector('.nav__links').addEventListener('click', function (e) {
 //selecting the entire document using document element of any webpage just using document is not enough
 //apply css styles to entire page
 //entire html
-console.log(document.documentElement);
-//select the whole document
+// console.log(document.documentElement);
+// //select the whole document
 
-//select the head and body
-console.log(document.head);
-console.log(document.body);
+// //select the head and body
+// console.log(document.head);
+// console.log(document.body);
 
 const header = document.querySelector('.header');
 //first element that matches selector here
 //every element
 const allSections = document.querySelectorAll('.section');
-console.log(allSections);
+// console.log(allSections);
 //returns node list containing all the elements with the class selection
 
 //most used ways of selecting elements
@@ -142,14 +142,14 @@ console.log(allSections);
 document.getElementById('section--1'); //don't need selector
 const allButtons = document.getElementsByTagName('button'); //get element by tag name all elements with tagname button
 
-console.log(allButtons); //tag name returns html collection instead of nodelist live collection
+// console.log(allButtons); //tag name returns html collection instead of nodelist live collection
 
 //if dom changes the html collection is updated automatically
 //eg remove element in inspector
 
 //node list doesn't update itself in the console when deleted
 
-console.log(document.getElementsByClassName('btn'));
+// console.log(document.getElementsByClassName('btn'));
 //no dot will also return a live html collection
 
 //creating and inserting elements
@@ -272,10 +272,10 @@ console.log(randomColor(0, 255));
 //attach event handler to first link and parent elements too
 
 document.querySelector('.nav__link').addEventListener('click', function (e) {
-  //in event handler this keyword points to element to which the event handler is attached (left of dot)
+  //in event handler 'this' keyword points to element to which the event handler is attached (left of dot)
   this.style.backgroundColor = randomColor(); //set style background to random colour
   console.log('LINK', e.target, e.currentTarget); // e.currenttarget element to which event is attached
-  //e.target where the EVENT originates where the click happened NOT element on which event handler was attached
+  //e.target where the EVENT ORIGINATES where the click happened NOT element on which event handler was attached
   console.log(e.currentTarget === this);
 
   //stop propagation (bubbling up)
@@ -288,12 +288,13 @@ document.querySelector('.nav__links').addEventListener('click', function (e) {
 
   //event starts at document root bubbles down to target element and then bubbles up
   //both handles are handling same event
-  console.log('CONTAINER', e.target);
+  console.log('CONTAINER', e.target, e.currentTarget);
   //target is nav link element where click first happened
   //event originated at link and bubbles up can handle event in all parent elements
 });
 
 document.querySelector('.nav').addEventListener(
+  //event bubbling
   'click',
   function (e) {
     this.style.backgroundColor = randomColor();
@@ -325,9 +326,9 @@ console.log(h1.querySelectorAll('.highlight'));
 //direct children
 //use child node nodes can be anything text comment span etc
 
-console.log(h1.childNodes);
+// console.log(h1.childNodes);
 
-console.log(h1.children);
+// console.log(h1.children);
 //html collection live collection which is updated
 
 //element child
@@ -358,16 +359,16 @@ console.log(h1.parentElement);
 
 //going sideways: siblings
 
-console.log(h1.previousElementSibling); //null nothing there
-console.log(h1.nextElementSibling); // next sibling h4 element
+//console.log(h1.previousElementSibling); //null nothing there
+//console.log(h1.nextElementSibling); // next sibling h4 element
 
 //sibling for nodes
-console.log(h1.previousSibling);
-console.log(h1.nextSibling);
+//console.log(h1.previousSibling);
+//console.log(h1.nextSibling);
 
 //all siblings move up to parent and read children from there
 
-console.log(h1.parentElement.children); //get all the children
+//console.log(h1.parentElement.children); //get all the children
 
 //get all siblings including itself
 //iterable html collection spread into array
@@ -455,12 +456,21 @@ nav.addEventListener('mouseout', handleHover.bind(1)); // opacity 1 in this case
 //pass "argument" into handler using bind handler function can only take one argument
 
 //sticky navigation
+
 //make navigation sticky in a certain position give it transparnt background
+const initialCoords = section1.getBoundingClientRect();
+//get coordinates of initial section position position
 
 //use scroll event available on window addevent listener
 //eventn will be fired each time page is scrolled
 window.addEventListener('scroll', function (e) {
-  console.log(e); //look at the event fired each time scroll
-  console.log(window.scrollY); //from viewport to top of the page
+  //console.log(e); //scroll event fired all the time not good for smartphones
+  //console.log(window.scrollY); // distance from viewport to top of the page
   //on window object
+  //when reach the position of the section make sticky, determine position of the first section
+  if (window.scrollY > initialCoords.top) {
+    nav.classList.add('sticky');
+  } else {
+    nav.classList.remove('sticky');
+  }
 });
