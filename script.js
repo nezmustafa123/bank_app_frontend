@@ -453,3 +453,14 @@ nav.addEventListener('mouseover', handleHover.bind(0.5)); //opacity 0.5 in this 
 nav.addEventListener('mouseout', handleHover.bind(1)); // opacity 1 in this case
 //use this keyword in function this keyword is now opacitty
 //pass "argument" into handler using bind handler function can only take one argument
+
+//sticky navigation
+//make navigation sticky in a certain position give it transparnt background
+
+//use scroll event available on window addevent listener
+//eventn will be fired each time page is scrolled
+window.addEventListener('scroll', function (e) {
+  console.log(e); //look at the event fired each time scroll
+  console.log(window.scrollY); //from viewport to top of the page
+  //on window object
+});
