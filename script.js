@@ -458,39 +458,61 @@ nav.addEventListener('mouseout', handleHover.bind(1)); // opacity 1 in this case
 //sticky navigation
 
 //make navigation sticky in a certain position give it transparnt background
-const initialCoords = section1.getBoundingClientRect();
-//get coordinates of initial section position position
+// const initialCoords = section1.getBoundingClientRect();
+// //get coordinates of initial section position position
 
-//use scroll event available on window addevent listener
-//eventn will be fired each time page is scrolled
-window.addEventListener('scroll', function (e) {
-  //console.log(e); //scroll event fired all the time not good for smartphones
-  //console.log(window.scrollY); // distance from viewport to top of the page
-  //on window object
-  //when reach the position of the section make sticky, determine position of the first section
-  if (window.scrollY > initialCoords.top) {
+// //use scroll event available on window addevent listener
+// //eventn will be fired each time page is scrolled
+// window.addEventListener('scroll', function (e) {
+//   //console.log(e); //scroll event fired all the time not good for smartphones
+//   //console.log(window.scrollY); // distance from viewport to top of the page
+//   //on window object
+//   //when reach the position of the section make sticky, determine position of the first section
+//   if (window.scrollY > initialCoords.top) {
+//     nav.classList.add('sticky');
+//   } else {
+//     nav.classList.remove('sticky');
+//   }
+// });
+
+//intersection observer api
+//allows code to oserve changes in way target element intersects other element or viewport
+// const obsCallback = function (entries, observer) {
+//   //function called with two arguments entries and observer object itself
+//   //entries is an array of threshold entries equal to value of the threshold property
+//   entries.forEach(entry => {
+//     console.log(entry);
+//   });
+// };
+// const obsOptions = {
+//   //root is element target element will intersect
+//   root: null,
+//   thresHold: [0, 0.2], //when 10% of the target element is within viewport callback will be called minimum percentage of target elmeent that has to be in viewport for callback to fire
+// }; //callback will trigger when target moves out of view and enters the view
+// const observer = new IntersectionObserver(obsCallback, obsOptions); //pass in callback function and options object
+// observer.observe(section1);
+//use observer object call observe method on it inputp section
+//section is target element viewport is root element whenever target intersects viewport at 10% the function will get called
+//when target element intersects viewport intersection observer entry appears
+
+//when header moves out of view make the navigation sticky
+
+// const header = document.querySelector('.header');
+const stickyNav = function (entries) {
+  const [entry] = entries; //destructure the first one
+  console.log(entry);
+  //if entry intersecting property is false then add sticky, when header out the viewport
+  if (!entry.isIntersecting) {
     nav.classList.add('sticky');
   } else {
     nav.classList.remove('sticky');
   }
+};
+const headerObserver = new IntersectionObserver(stickyNav, {
+  //stickynav callback
+  root: null, //root null viewport
+  threshold: 0, //when header is invisible run function
+  rootMargin: '-90px', //margin of -90 pixels as if the header stops 90 pixels before 90 pixels is height of nav
 });
 
-//intersection observer api
-//allows code to boserve changes in way target element intersects other element or viewport
-const obsCallback = function (entries, observer) {
-  //function called with two arguments entries and observer object itself
-  //entries is an array of threshold entries qeual to value of the threshold property
-  entries.forEach(entry => {
-    console.log(entry);
-  });
-};
-const obsOptions = {
-  //root is element target element will intersect
-  root: null,
-  thresHold: 0.1, //when 10% of the target element is within viewport callback will be called
-};
-const observer = new IntersectionObserver(obsCallback, obsOptions); //pass in callback function and options object
-observer.observe(section1);
-//use observer object call observe method on it inputp section
-//section is target element viewport is root element whenever target intersects viewport at 10% the function will get called
-//when target element intersects viewport intersection observer entry appears
+headerObserver.observe(header);
