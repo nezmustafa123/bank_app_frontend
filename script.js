@@ -42,7 +42,7 @@ document.addEventListener('keydown', function (e) {
 ///scroll
 btnScrollTo.addEventListener('click', function (e) {
   //first way get the coordinates fo element to scroll to
-  const section1coords = section1.getBoundingClientRect(); //returns coordinates from left side x and y position mesaured from top
+  const section1coords = section1.getBoundingClientRect(); //returns object that has coordinates properties from left side x and y position mesaured from top
   console.log(section1coords); //section's coordinates
 
   // console.log(e.target.getBoundingClientRect()); //cordinates of button x and y
@@ -498,6 +498,8 @@ nav.addEventListener('mouseout', handleHover.bind(1)); // opacity 1 in this case
 //when header moves out of view make the navigation sticky
 
 // const header = document.querySelector('.header');
+const navHeight = nav.getBoundingClientRect().height; //get height property in client rect object
+//get the nav height dynamically instead of hardcode
 const stickyNav = function (entries) {
   const [entry] = entries; //destructure the first one
   console.log(entry);
@@ -512,7 +514,7 @@ const headerObserver = new IntersectionObserver(stickyNav, {
   //stickynav callback
   root: null, //root null viewport
   threshold: 0, //when header is invisible run function
-  rootMargin: '-90px', //margin of -90 pixels as if the header stops 90 pixels before 90 pixels is height of nav
+  rootMargin: `-${navHeight}px`, // template literal margin of -90 pixels as if the header stops 90 pixels before 90 pixels is height
 });
 
 headerObserver.observe(header);
