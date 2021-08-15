@@ -487,7 +487,7 @@ const obsCallback = function (entries, observer) {
 const obsOptions = {
   //root is element target element will intersect
   root: null,
-  thresHold: 0.1, //when callback will be called
+  thresHold: 0.1, //when 10% of the target element is within viewport callback will be called
 };
 const observer = new IntersectionObserver(obsCallback, obsOptions); //pass in callback function and options object
 observer.observe(section1);
