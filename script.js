@@ -424,10 +424,10 @@ const handleHover = function (e, opacity) {
 
     //select sibling elements move up two levels use closet method
 
-    //search for parent that matches query find closest parent with nav
+    //search for parent that matches query find closest parent with nav class
     //can also choose an even higher up parent in this case choosing the main nav
     //then within it choose all the nav links
-    const siblings = link.closest('.nav').querySelectorAll('.nav');
+    const siblings = link.closest('.nav').querySelectorAll('.nav__');
     const logo = link.closest('.nav').querySelector('img');
     //siblings will contain initial link so need to make sure it's not target
     siblings.forEach(el => {
@@ -474,3 +474,15 @@ window.addEventListener('scroll', function (e) {
     nav.classList.remove('sticky');
   }
 });
+
+//intersection observer api
+//allows code to boserve changes in way target element intersects other element or viewport
+const obsCallback = function () {};
+const obsOptions = {
+  //root is element target element will intersect
+  root: null,
+  thresHold: 0.1, //when callback will be called
+};
+const observer = new IntersectionObserver(); //pass in callback function and options object
+observer.observe(section1);
+//use observer object call observe method on it inputp section
