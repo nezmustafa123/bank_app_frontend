@@ -477,12 +477,20 @@ window.addEventListener('scroll', function (e) {
 
 //intersection observer api
 //allows code to boserve changes in way target element intersects other element or viewport
-const obsCallback = function () {};
+const obsCallback = function (entries, observer) {
+  //function called with two arguments entries and observer object itself
+  //entries is an array of threshold entries qeual to value of the threshold property
+  entries.forEach(entry => {
+    console.log(entry);
+  });
+};
 const obsOptions = {
   //root is element target element will intersect
   root: null,
   thresHold: 0.1, //when callback will be called
 };
-const observer = new IntersectionObserver(); //pass in callback function and options object
+const observer = new IntersectionObserver(obsCallback, obsOptions); //pass in callback function and options object
 observer.observe(section1);
 //use observer object call observe method on it inputp section
+//section is target element viewport is root element whenever target intersects viewport at 10% the function will get called
+//when target element intersects viewport intersection observer entry appears
