@@ -532,6 +532,12 @@ const revealSection = function (entries, observer) {
   //use guard clause if entry isn't intersecting then return the function
   //find out which section intersects viewport
   entry.target.classList.remove('section--hidden');
+
+  //unobserve
+
+  observer.unobserve(entry.target);
+  //unobserve element which is contained in entry.target
+  //sections won't be observe and come in and out anymore
 };
 //observe all sections using one observer
 const sectionObserver = new IntersectionObserver(revealSection, {
