@@ -2,14 +2,15 @@
 
 ///////////////////////////////////////
 // Modal window
-
+const header = document.querySelector('.header');
 const modal = document.querySelector('.modal');
 const overlay = document.querySelector('.overlay');
 const btnCloseModal = document.querySelector('.btn--close-modal');
 const btnsOpenModal = document.querySelectorAll('.btn--show-modal');
 const btnScrollTo = document.querySelector('.btn--scroll-to');
+const allButtons = document.getElementsByTagName('button'); //get element by tag name all elements with tagname button
+const allSections = document.querySelectorAll('.section');
 const section1 = document.querySelector('#section--1');
-
 const tabs = document.querySelectorAll('.operations__tab');
 const tabsContainer = document.querySelector('.operations__tab-container');
 const tabsContent = document.querySelectorAll('.operations__content');
@@ -129,10 +130,8 @@ document.querySelector('.nav__links').addEventListener('click', function (e) {
 // console.log(document.head);
 // console.log(document.body);
 
-const header = document.querySelector('.header');
 //first element that matches selector here
 //every element
-const allSections = document.querySelectorAll('.section');
 // console.log(allSections);
 //returns node list containing all the elements with the class selection
 
@@ -140,7 +139,6 @@ const allSections = document.querySelectorAll('.section');
 //also available on all the elements to use
 
 document.getElementById('section--1'); //don't need selector
-const allButtons = document.getElementsByTagName('button'); //get element by tag name all elements with tagname button
 
 // console.log(allButtons); //tag name returns html collection instead of nodelist live collection
 
@@ -256,7 +254,7 @@ document
 const randomInt = (min, max) =>
   Math.floor(Math.random() * (max - min) + 1) + min;
 //x math.random * (max - min) then add min to both sides
-//math.random 0....1 -> 0...(max-min) -> min...(max-min + min)
+//math.random is between 0....1 -> multipy by max(min) get a number between 0...(max-min) -> add min to both sides and cancel min...(max-min + min) min.. max
 //cancel (-min + min)
 //min...
 //use random number function to generate random colour in template literal string string
@@ -433,7 +431,7 @@ const handleHover = function (e, opacity) {
     siblings.forEach(el => {
       if (el !== link) {
         el.style.opacity = this;
-        //change the opacity of all the other links to 0,5
+        //change the opacity of all the other links to 0,5 or 1 depending on this keyword
       }
     });
     logo.style.opacity = this;
@@ -442,7 +440,7 @@ const handleHover = function (e, opacity) {
 
 // nav.addEventListener('mouseover', function (e) {
 //   handleHover(e, 0.5);
-// }); //opacity 0.5 in this case can't pass in parameters because will call straight awaay
+// }); //opacity 0.5 in this case can't pass in parameters because will call straight away
 // //javascript expects a function not a function to be called no value returned
 // nav.addEventListener('mouseout', function (e) {
 //   handleHover(e, 1);
@@ -462,7 +460,7 @@ nav.addEventListener('mouseout', handleHover.bind(1)); // opacity 1 in this case
 // //get coordinates of initial section position position
 
 // //use scroll event available on window addevent listener
-// //eventn will be fired each time page is scrolled
+// //event will be fired each time page is scrolled
 // window.addEventListener('scroll', function (e) {
 //   //console.log(e); //scroll event fired all the time not good for smartphones
 //   //console.log(window.scrollY); // distance from viewport to top of the page
@@ -491,7 +489,7 @@ nav.addEventListener('mouseout', handleHover.bind(1)); // opacity 1 in this case
 // }; //callback will trigger when target moves out of view and enters the view
 // const observer = new IntersectionObserver(obsCallback, obsOptions); //pass in callback function and options object
 // observer.observe(section1);
-//use observer object call observe method on it inputp section
+//use observer object call observe method on it input section
 //section is target element viewport is root element whenever target intersects viewport at 10% the function will get called
 //when target element intersects viewport intersection observer entry appears
 
@@ -502,7 +500,7 @@ const navHeight = nav.getBoundingClientRect().height; //get height property in c
 //get the nav height dynamically instead of hardcode
 const stickyNav = function (entries) {
   const [entry] = entries; //destructure the first one
-  console.log(entry);
+  // console.log(entry);
   //if entry intersecting property is false then add sticky, when header out the viewport
   if (!entry.isIntersecting) {
     nav.classList.add('sticky');
@@ -520,3 +518,29 @@ const headerObserver = new IntersectionObserver(stickyNav, {
 headerObserver.observe(header);
 
 //reveal element on scroll
+//section hidden class
+//reveal sections
+//select all sections
+
+const revealSection = function (entries, observer) {
+  //call back function paremeters can have any name
+  const [entry] = entries; //one threshold get it via destrucuting
+  console.log(entries);
+  // console.log(entry);
+
+  if (!entry.isIntersecting) return;
+  //use guard clause if entry isn't intersecting then return the function
+  //find out which section intersects viewport
+  entry.target.classList.remove('section--hidden');
+};
+//observe all sections using one observer
+const sectionObserver = new IntersectionObserver(revealSection, {
+  root: null, //root will be viewport
+  threshold: 0.1,
+});
+
+//loop through nodelist using foreach for each use observer to observe each section
+allSections.forEach(function (section) {
+  sectionObserver.observe(section); // each section is the target
+  section.classList.add('section--hidden');
+});
