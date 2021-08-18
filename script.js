@@ -525,7 +525,7 @@ headerObserver.observe(header);
 const revealSection = function (entries, observer) {
   //call back function paremeters can have any name
   const [entry] = entries; //one threshold get it via destrucuting
-  console.log(entries);
+  // console.log(entries);
   // console.log(entry);
 
   if (!entry.isIntersecting) return;
@@ -550,3 +550,23 @@ allSections.forEach(function (section) {
   sectionObserver.observe(section); // each section is the target
   section.classList.add('section--hidden');
 });
+
+//lazy loading images for performance
+//load low resolution image first then replace it with one that is specified in data source attribute
+
+//remove class filter that makes image blurred
+//ones that will be lazy loaded are ones with data source
+//select elements that contain that property
+const imgTargets = document.querySelectorAll('img[data-src]');
+
+const loadImg = function (entries, observer) {
+  const [entry] = entries;
+  console.log(entry);
+};
+const imgObserver = new InterSectionOvserver(loadImg, {
+  root: null,
+  threshold: 0,
+});
+//attach image observer to all targets
+
+imgTargets.forEach(img => imgObserver.observe(img));
