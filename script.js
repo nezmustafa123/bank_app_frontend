@@ -568,9 +568,14 @@ const loadImg = function (entries, observer) {
   //replace src with data-src
 
   //each image is at entry.target
-  //special value at dataset property
-
-  entry.target.src = entry.target.dataset.src;
+  //special value stored at dataset property
+  //entry element being intersected
+  entry.target.src = entry.target.dataset.src; //look inside dataset property for custom src attribute
+  //entry target is features__img lazy-img
+  entry.target.addEventListener('load', function () {
+    entry.target.classList.remove('lazy-img');
+    //remove class list when that element is loaded
+  });
 };
 const imgObserver = new IntersectionObserver(loadImg, {
   root: null,
