@@ -297,7 +297,7 @@ document.querySelector('.nav').addEventListener(
   function (e) {
     this.style.backgroundColor = randomColor();
     //event handled in all three places
-    console.log('NAV', e.target);
+    // console.log('NAV', e.target);
     //target is nav link element where click first happened
   },
   true
@@ -316,7 +316,7 @@ const h1 = document.querySelector('h1');
 //going downwards: child
 //select a child elements
 //select the two elements with class highlight
-console.log(h1.querySelectorAll('.highlight'));
+// console.log(h1.querySelectorAll('.highlight'));
 //returns node list returns all elements with highlight class within the h1 element
 //it will go down as deep as necessary into dom tree other elements with highlight won't get selected
 //won't
@@ -388,7 +388,7 @@ console.log(h1.parentElement);
 tabsContainer.addEventListener('click', function (e) {
   const clicked = e.target.closest('.operations__tab'); //dom traversing search for closest operations tab use closest method find closest parent with this class name
   //use data attribute that contains number of the tab whwnever click on span element
-  // console.log(clicked);
+  console.log(clicked);
   //when clicking in tabs container there'll be no parent with that class
 
   if (!clicked) return; //if clicked is null then return the function immediately guard clause
@@ -400,7 +400,7 @@ tabsContainer.addEventListener('click', function (e) {
 
   //activate content area using data attribute match the data tab value in the dataset property with the tab element class
   document
-    .querySelector(`.operations__content--${clicked.dataset.tab}`)
+    .querySelector(`.operations__content--${clicked.dataset.tab}`) //the end of operations content clas will match with button data-tab value
     .classList.add('operations__content--active'); //give active class
   //button stored in clicked variable get value inside dataset property use it to construct template literal and class selector
 });
@@ -562,8 +562,17 @@ const imgTargets = document.querySelectorAll('img[data-src]');
 const loadImg = function (entries, observer) {
   const [entry] = entries;
   console.log(entry);
+
+  if (!entry.isIntersecting) return;
+
+  //replace src with data-src
+
+  //each image is at entry.target
+  //special value at dataset property
+
+  entry.target.src = entry.target.dataset.src;
 };
-const imgObserver = new InterSectionOvserver(loadImg, {
+const imgObserver = new IntersectionObserver(loadImg, {
   root: null,
   threshold: 0,
 });
