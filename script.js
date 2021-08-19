@@ -561,7 +561,7 @@ const imgTargets = document.querySelectorAll('img[data-src]');
 
 const loadImg = function (entries, observer) {
   const [entry] = entries;
-  console.log(entry);
+  // console.log(entry);
 
   if (!entry.isIntersecting) return;
 
@@ -574,8 +574,10 @@ const loadImg = function (entries, observer) {
   //entry target is features__img lazy-img
   entry.target.addEventListener('load', function () {
     entry.target.classList.remove('lazy-img');
-    //remove class list when that element is loaded
+    //remove lazy image class when that element is loaded
   });
+
+  observer.unobserve(entry.target);
 };
 const imgObserver = new IntersectionObserver(loadImg, {
   root: null,
