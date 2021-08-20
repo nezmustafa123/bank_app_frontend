@@ -587,3 +587,13 @@ const imgObserver = new IntersectionObserver(loadImg, {
 //attach image observer to all targets
 
 imgTargets.forEach(img => imgObserver.observe(img));
+
+//silder componnent
+
+const slides = document.querySelectorAll('.slide');
+
+//loop through slides for each slide style transform translate
+
+slides.forEach((slide, i) => slide.style.transform) = `translateX(${100 * i})`);
+//multiply 100% by current index in the translate x function translate x will move them a position of 100% of the width in the x axis
+
