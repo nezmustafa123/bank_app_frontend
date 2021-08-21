@@ -593,14 +593,27 @@ imgTargets.forEach(img => imgObserver.observe(img));
 const slides = document.querySelectorAll('.slide');
 const btnLeft = document.querySelectorAll('.slider__btn--left');
 const btnRight = document.querySelectorAll('.slider__btn--right');
-
+let curSlide = 0; //current slide start at 0
 //loop through slides for each slide style transform translate
 //scale down slider
 const slider = document.querySelector('.slider');
-slider.style.transform = 'scale(0.5) translateX(-400px)';
+slider.style.transform = 'scale(0.5) translateX(-300px)';
 slider.style.overflow = 'visible';
 
 slides.forEach(
   (slide, i) => (slide.style.transform = `translateX(${100 * i}%)`)
 );
 //multiply 100% by current index in the translate x function translate x will move them a position of 100% of the width in the x axis
+// 0%, 100%, 200%, 300%
+
+//next slide change percentage so the slide wish to move to has zeo percent
+btnRight.addEventListener('click', function () {
+  curSlide++;
+  // console.log(curSlide);
+
+  slides.forEach(
+    (slide, i) =>
+      (slide.style.transform = `translateX(${100 * (i - curSlide)}%)`) //take current index subtract current slide
+  );
+}); //if curslide is 1  i = 0 0-1 is -1 -1 * 100 = -100
+//curSlide = 1; -100%, 0%, 100%, 200%
