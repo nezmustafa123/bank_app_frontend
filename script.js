@@ -548,7 +548,7 @@ const sectionObserver = new IntersectionObserver(revealSection, {
 //loop through nodelist using foreach for each use observer to observe each section
 allSections.forEach(function (section) {
   sectionObserver.observe(section); // each section is the target
-  section.classList.add('section--hidden');
+  // section.classList.add('section--hidden');
 });
 
 //lazy loading images for performance
@@ -591,9 +591,16 @@ imgTargets.forEach(img => imgObserver.observe(img));
 //silder componnent
 
 const slides = document.querySelectorAll('.slide');
+const btnLeft = document.querySelectorAll('.slider__btn--left');
+const btnRight = document.querySelectorAll('.slider__btn--right');
 
 //loop through slides for each slide style transform translate
+//scale down slider
+const slider = document.querySelector('.slider');
+slider.style.transform = 'scale(0.5) translateX(-400px)';
+slider.style.overflow = 'visible';
 
-slides.forEach((slide, i) => slide.style.transform) = `translateX(${100 * i})`);
+slides.forEach(
+  (slide, i) => (slide.style.transform = `translateX(${100 * i}%)`)
+);
 //multiply 100% by current index in the translate x function translate x will move them a position of 100% of the width in the x axis
-
