@@ -597,9 +597,9 @@ let curSlide = 0; //current slide start at 0
 let maxSlide = slides.length; //read node lists like on an array max slide you can go to
 //loop through slides for each slide style transform translate
 //scale down slider
-const slider = document.querySelector('.slider');
-slider.style.transform = 'scale(1) translateX(0)';
-slider.style.overflow = 'visible';
+// const slider = document.querySelector('.slider');
+// slider.style.transform = 'scale(1) translateX(0)';
+// slider.style.overflow = 'visible';
 
 // slides.forEach(
 //   (slide, i) => (slide.style.transform = `translateX(${100 * i}%)`)
