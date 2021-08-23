@@ -601,22 +601,31 @@ const slider = document.querySelector('.slider');
 slider.style.transform = 'scale(1) translateX(0)';
 slider.style.overflow = 'visible';
 
-slides.forEach(
-  (slide, i) => (slide.style.transform = `translateX(${100 * i}%)`)
-);
-//multiply 100% by current index in the translate x function translate x will move them a position of 100% of the width in the x axis
+// slides.forEach(
+//   (slide, i) => (slide.style.transform = `translateX(${100 * i}%)`)
+// );
+//multiply 100% by current index of element in slides node list inside the translate x function translate x will shift them a position of 100% of the width in the x axis
 // 0%, 100%, 200%, 300%
 
-//refactoring pass in the number of the slide
+//refactoring pass in the number of the slide into a seperate function
 const goToSlide = function (slide) {
   slides.forEach(
-    (s, i) => (s.style.transform = `translateX(${100 * (i - curSlide)}%)`) //leeps going have to define number of slides till it stops
+    //update transform property on all slides
+    (s, i) => (s.style.transform = `translateX(${100 * (i - slide)}%)`) //leeps going have to define number of slides till it stops
   );
+  //if curslide is 1  i = 0 0-1 is -1 -1 * 100 = -100
+  //curSlide = 1; -100%, 0%, 100%, 200%
   // 0 -1 when cur slide is 1 and index is 1 1-1 is 0 so will be in the middle
 };
 
-//next slide change percentage so the slide wish to move to has zeo percent
-btnRight.addEventListener('click', function () {
+//call go to slide straight away when starting with slide set to zero
+//i - 0 is just i so it's the same as the code commented out
+goToSlide(0);
+
+//next slide change percentage so the slide wish to move to has zero percent
+
+const nextSlide = function () {
+  //no parameters needed
   if (curSlide === maxSlide - 1) {
     curSlide = 0;
     //return to beginning of slide
@@ -624,7 +633,17 @@ btnRight.addEventListener('click', function () {
     curSlide++;
   }
 
+  goToSlide(curSlide); //call go to slide with curSlide
+};
+
+const prevSlide = function () {
+  if (curSlide === 0) {
+    curSlide = maxSlide - 1; //if current slide aldready 0 cur slide becomes 4-1 = 3
+  } else {
+    curSlide--;
+  }
   goToSlide(curSlide);
-});
-//if curslide is 1  i = 0 0-1 is -1 -1 * 100 = -100
-//curSlide = 1; -100%, 0%, 100%, 200%
+};
+
+btnRight.addEventListener('click', nextSlide);
+btnLeft.addEventListener('click', prevSlide);
