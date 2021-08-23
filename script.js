@@ -594,10 +594,11 @@ const slides = document.querySelectorAll('.slide');
 const btnLeft = document.querySelector('.slider__btn--left');
 const btnRight = document.querySelector('.slider__btn--right');
 let curSlide = 0; //current slide start at 0
+let maxSlide = slides.length; //read node lists like on an array max slide you can go to
 //loop through slides for each slide style transform translate
 //scale down slider
 const slider = document.querySelector('.slider');
-slider.style.transform = 'scale(0.5) translateX(-300px)';
+slider.style.transform = 'scale(1) translateX(0)';
 slider.style.overflow = 'visible';
 
 slides.forEach(
@@ -606,14 +607,24 @@ slides.forEach(
 //multiply 100% by current index in the translate x function translate x will move them a position of 100% of the width in the x axis
 // 0%, 100%, 200%, 300%
 
+//refactoring pass in the number of the slide
+const goToSlide = function (slide) {
+  slides.forEach(
+    (s, i) => (s.style.transform = `translateX(${100 * (i - curSlide)}%)`) //leeps going have to define number of slides till it stops
+  );
+  // 0 -1 when cur slide is 1 and index is 1 1-1 is 0 so will be in the middle
+};
+
 //next slide change percentage so the slide wish to move to has zeo percent
 btnRight.addEventListener('click', function () {
-  curSlide++;
+  if (curSlide === maxSlide - 1) {
+    curSlide = 0;
+    //return to beginning of slide
+  } else {
+    curSlide++;
+  }
 
-  slides.forEach(
-    (slide, i) =>
-      (slide.style.transform = `translateX(${100 * (i - curSlide)}%)`)
-  );
+  goToSlide(curSlide);
 });
 //if curslide is 1  i = 0 0-1 is -1 -1 * 100 = -100
 //curSlide = 1; -100%, 0%, 100%, 200%
