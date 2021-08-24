@@ -647,3 +647,13 @@ const prevSlide = function () {
 
 btnRight.addEventListener('click', nextSlide);
 btnLeft.addEventListener('click', prevSlide);
+
+//handle keyboard events
+
+document.addEventListener('keydown', function (e) {
+  console.log(e);
+  if (e.key === 'ArrowLeft') prevSlide();
+  e.key === 'ArrowRight' && nextSlide(); //short circuiting
+});
+// when hitting right arrow key key in event object is arrow right
+// when hitting left arrow key key in event object is arrow left
