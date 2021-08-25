@@ -626,6 +626,20 @@ const createDots = function () {
 };
 
 createDots();
+//function to change active slide
+const activeDot = function (slide) {
+  //pass in current slide select all dots first and remove active class then add
+  document
+    .querySelectorAll('.dots_dot')
+    .forEach(dot => dot.classList.remove('dots__dot--active')); //remove active class for each dot
+
+  //select one that is needed based off data attribute
+  //use square brackets to select data-slide attribute template literal and quote mixture should have value of slide
+  document
+    .querySelector(`.dots__dot[data-slide ="${slide}"]`)
+    .classList.add('dots__dot--active');
+  //eg pass in slide 2 active dot corresponding to slide 2
+};
 
 const goToSlide = function (slide) {
   slides.forEach(
@@ -653,6 +667,7 @@ const nextSlide = function () {
   }
 
   goToSlide(curSlide); //call go to slide with curSlide
+  activateDot(curSlide);
 };
 
 const prevSlide = function () {
@@ -662,6 +677,7 @@ const prevSlide = function () {
     curSlide--;
   }
   goToSlide(curSlide);
+  activeDot(curSlide);
 };
 
 btnRight.addEventListener('click', nextSlide);
@@ -681,7 +697,7 @@ document.addEventListener('keydown', function (e) {
 
 dotContainer.addEventListener('click', function (e) {
   if (e.target.classList.contains('dots__dot')) {
-    console.log(e);
+    console.log(e.currentTarget);
     const { slide } = e.target.dataset; //use slide attribute from dataset property in event object
     //destructure reading from object
     console.log(slide);
