@@ -593,6 +593,8 @@ imgTargets.forEach(img => imgObserver.observe(img));
 const slides = document.querySelectorAll('.slide');
 const btnLeft = document.querySelector('.slider__btn--left');
 const btnRight = document.querySelector('.slider__btn--right');
+const dotContainer = document.querySelector('.dots');
+
 let curSlide = 0; //current slide start at 0
 let maxSlide = slides.length; //read node lists like on an array max slide you can go to
 //loop through slides for each slide style transform translate
@@ -608,6 +610,23 @@ let maxSlide = slides.length; //read node lists like on an array max slide you c
 // 0%, 100%, 200%, 300%
 
 //refactoring pass in the number of the slide into a seperate function
+//organise slider code into funcitions
+const createDots = function () {
+  //dots have data-slide attribute
+  //create one element for each slide
+  slides.forEach(function (_, i) {
+    //each button will have dots_dot class use throwaray varuable only need index
+    //for each slide create dynamic html each dot is one element will class dots_dot
+
+    dotContainer.insertAdjacentHTML(
+      'beforeend',
+      `<button class = "dots__dot" data-slide="${i}"></button>` //insert html code with index first button index 0 1 2 3  move to correct slide once dots is clicked
+    );
+  });
+};
+
+createDots();
+
 const goToSlide = function (slide) {
   slides.forEach(
     //update transform property on all slides
@@ -657,3 +676,17 @@ document.addEventListener('keydown', function (e) {
 });
 // when hitting right arrow key key in event object is arrow right
 // when hitting left arrow key key in event object is arrow left
+
+//use event delegation
+
+dotContainer.addEventListener('click', function (e) {
+  if (e.target.classList.contains('dots__dot')) {
+    console.log(e);
+    const { slide } = e.target.dataset; //use slide attribute from dataset property in event object
+    //destructure reading from object
+    console.log(slide);
+    //go to slide that read from dataset
+
+    goToSlide(slide);
+  }
+});
