@@ -611,6 +611,8 @@ let maxSlide = slides.length; //read node lists like on an array max slide you c
 
 //refactoring pass in the number of the slide into a seperate function
 //organise slider code into funcitions
+
+//FUNCTIONS
 const createDots = function () {
   //dots have data-slide attribute
   //create one element for each slide
@@ -625,22 +627,21 @@ const createDots = function () {
   });
 };
 
-createDots();
 //function to change active slide
-const activeDot = function (slide) {
+const activateDot = function (slide) {
   //pass in current slide select all dots first and remove active class then add
   document
-    .querySelectorAll('.dots_dot')
+    .querySelectorAll('.dots__dot')
     .forEach(dot => dot.classList.remove('dots__dot--active')); //remove active class for each dot
 
   //select one that is needed based off data attribute
   //use square brackets to select data-slide attribute template literal and quote mixture should have value of slide
   document
-    .querySelector(`.dots__dot[data-slide ="${slide}"]`)
+    .querySelector(`.dots__dot[data-slide="${slide}"]`)
     .classList.add('dots__dot--active');
   //eg pass in slide 2 active dot corresponding to slide 2
 };
-
+// activateDot(0);
 const goToSlide = function (slide) {
   slides.forEach(
     //update transform property on all slides
@@ -653,7 +654,7 @@ const goToSlide = function (slide) {
 
 //call go to slide straight away when starting with slide set to zero
 //i - 0 is just i so it's the same as the code commented out
-goToSlide(0);
+// goToSlide(0);
 
 //next slide change percentage so the slide wish to move to has zero percent
 
@@ -677,9 +678,14 @@ const prevSlide = function () {
     curSlide--;
   }
   goToSlide(curSlide);
-  activeDot(curSlide);
+  activateDot(curSlide);
 };
-
+const init = function () {
+  goToSlide(0);
+  createDots();
+  activateDot(0);
+};
+init();
 btnRight.addEventListener('click', nextSlide);
 btnLeft.addEventListener('click', prevSlide);
 
@@ -704,5 +710,6 @@ dotContainer.addEventListener('click', function (e) {
     //go to slide that read from dataset
 
     goToSlide(slide);
+    activateDot(curSlide);
   }
 });
