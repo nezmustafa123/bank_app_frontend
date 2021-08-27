@@ -713,3 +713,26 @@ dotContainer.addEventListener('click', function (e) {
     activateDot(curSlide);
   }
 });
+
+//life cycle dom events
+//on content load
+//will fire when html parsed and converted to dom tree
+document.addEventListener('DOMContentLoaded', function (e) {
+  console.log('HTML parsed and DOM tree built!'); //just html and javascript need to be loaded
+});
+//if have script tab don't have to use dom content loaded
+
+//same as document.ready in javascript
+
+//load event fired by window as soon as html is passed asn external resource is loaded
+
+window.addEventListener('load', function (e) {
+  console.log('Page fully loaded');
+});
+
+window.addEventListener('beforeunload', function (e) {
+  //as users leave the page
+  e.preventDefault(); //need to prevent default for broswers
+  console.log(e);
+  e.returnValue = ''; //leaving condition generic message
+});
