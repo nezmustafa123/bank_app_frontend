@@ -736,3 +736,9 @@ window.addEventListener('beforeunload', function (e) {
   console.log(e);
   e.returnValue = ''; //leaving condition generic message
 });
+
+//defer and aync attributes to add javascript influence the way javascript is downloaded and executed
+
+//using defer in html head is the best solution
+//include library before script using defer and async
+//for thrid party scripts where order doesn't matter eg google analytics use async
