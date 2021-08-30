@@ -97,14 +97,14 @@ document.querySelectorAll('.nav__link').forEach(function (el) {
 // 2. Determine what element orginated  from using event target
 
 document.querySelector('.nav__links').addEventListener('click', function (e) {
-  console.log(e.target); // use target to see where event happened work with click that happened on one of the links
+  // console.log(e.target); // use target to see where event happened work with click that happened on one of the links
 
   //matching classlist strategy
 
   if (e.target.classList.contains('nav__link')) {
     // if class contains nav link fires otherwise doesn't
     e.preventDefault(); //prevent default scroll/jump to section to implement scrolling
-    console.log('LINK');
+    // console.log('LINK');
     //take href attribulte form nav link buttons this refers to element event handler is attached to (each link)
     //get href get attribute to get the writte href part not absolute value
     const id = e.target.getAttribute('href'); //element is e.target
@@ -272,9 +272,9 @@ console.log(randomColor(0, 255));
 document.querySelector('.nav__link').addEventListener('click', function (e) {
   //in event handler 'this' keyword points to element to which the event handler is attached (left of dot)
   this.style.backgroundColor = randomColor(); //set style background to random colour
-  console.log('LINK', e.target, e.currentTarget); // e.currenttarget element to which event is attached
+  //console.log('LINK', e.target, e.currentTarget); // e.currenttarget element to which event is attached
   //e.target where the EVENT ORIGINATES where the click happened NOT element on which event handler was attached
-  console.log(e.currentTarget === this);
+  // console.log(e.currentTarget === this);
 
   //stop propagation (bubbling up)
 
@@ -286,7 +286,7 @@ document.querySelector('.nav__links').addEventListener('click', function (e) {
 
   //event starts at document root bubbles down to target element and then bubbles up
   //both handles are handling same event
-  console.log('CONTAINER', e.target, e.currentTarget);
+  //console.log('CONTAINER', e.target, e.currentTarget);
   //target is nav link element where click first happened
   //event originated at link and bubbles up can handle event in all parent elements
 });
@@ -337,11 +337,11 @@ h1.lastElementChild.style.color = 'white';
 
 //going upwards: parents
 
-console.log(h1.parentNode);
+//console.log(h1.parentNode);
 //h1 is inside header title
 //header title dirent parent
 
-console.log(h1.parentElement);
+//console.log(h1.parentElement);
 //in this case the same element is also a node
 
 //need element which is not a direct parent find one far away in the dom tree
@@ -388,7 +388,7 @@ console.log(h1.parentElement);
 tabsContainer.addEventListener('click', function (e) {
   const clicked = e.target.closest('.operations__tab'); //dom traversing search for closest operations tab use closest method find closest parent with this class name
   //use data attribute that contains number of the tab whwnever click on span element
-  console.log(clicked);
+  //console.log(clicked);
   //when clicking in tabs container there'll be no parent with that class
 
   if (!clicked) return; //if clicked is null then return the function immediately guard clause
@@ -733,7 +733,7 @@ window.addEventListener('load', function (e) {
 window.addEventListener('beforeunload', function (e) {
   //as users leave the page
   e.preventDefault(); //need to prevent default for broswers
-  console.log(e);
+  // console.log(e);
   e.returnValue = ''; //leaving condition generic message
 });
 
