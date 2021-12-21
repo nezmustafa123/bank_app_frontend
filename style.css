@@ -580,6 +580,11 @@ h4 {
   font-size: 1.6rem;
   color: #eee;
   text-decoration: none;
+  transition: text-decoration 5s ease;
+}
+
+.footer__link:hover {
+  text-decoration: underline;
 }
 
 .footer__logo {
