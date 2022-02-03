@@ -575,6 +575,7 @@ h4 {
 .footer {
   padding: 10rem 3rem;
   background-color: #37383d;
+  max-height: 44rem;
 }
 
 .footer__nav {
@@ -600,7 +601,7 @@ h4 {
 }
 
 .footer__logo {
-  height: 5rem;
+  height: 8rem;
   display: block;
   margin: 0 auto;
   margin-bottom: 5rem;
@@ -610,6 +611,7 @@ h4 {
   font-size: 1.4rem;
   color: #aaa;
   text-align: center;
+  margin-top: 15rem;
 }
 
 .footer__copyright .footer__link {
